@@ -1,0 +1,111 @@
+version: "3.8"
+
+services:
+  quito-db:
+    image: mariadb:10.6
+    container_name: Quito
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: Medical_Center
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: adminpass
+      MARIADB_SERVER_ID: 1
+      MARIADB_REPLICATION_MODE: master
+      MARIADB_REPLICATION_USER: replicator
+      MARIADB_REPLICATION_PASSWORD: replica_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - quito_db_data:/var/lib/mysql
+      - ./custom-my.cnf:/etc/mysql/conf.d/custom-my.cnf
+    networks:
+      - hospital_network
+
+  guayaquil-db:
+    image: mariadb:10.6
+    container_name: Guayaquil
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: Medical_Center
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: adminpass
+      MARIADB_SERVER_ID: 2
+      MARIADB_REPLICATION_MODE: slave
+      MARIADB_REPLICATION_USER: replicator
+      MARIADB_REPLICATION_PASSWORD: replica_pass
+      MARIADB_MASTER_HOST: Quito
+      MARIADB_MASTER_PORT: 3306
+    ports:
+      - "3308:3306"
+    volumes:
+      - guayaquil_db_data:/var/lib/mysql
+    networks:
+      - hospital_network
+    depends_on:
+      - quito-db
+
+  cuenca-db:
+    image: mariadb:10.6
+    container_name: Cuenca
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: Medical_Center
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: adminpass
+      MARIADB_SERVER_ID: 3
+      MARIADB_REPLICATION_MODE: slave
+      MARIADB_REPLICATION_USER: replicator
+      MARIADB_REPLICATION_PASSWORD: replica_pass
+      MARIADB_MASTER_HOST: Quito
+      MARIADB_MASTER_PORT: 3306
+    ports:
+      - "3309:3306"
+    volumes:
+      - cuenca_db_data:/var/lib/mysql
+    networks:
+      - hospital_network
+    depends_on:
+      - quito-db
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./backend/.env
+    networks:
+      - hospital_network
+    depends_on:
+      - quito-db
+      - guayaquil-db
+      - cuenca-db
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - hospital_network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  quito_db_data:
+  guayaquil_db_data:
+  cuenca_db_data:
+
+networks:
+  hospital_network:
+    driver: bridge
