@@ -5,7 +5,7 @@
 
 ## 📌 Descripción
 
-Este sistema distribuido gestiona múltiples centros médicos (Quito, Guayaquil, Cuenca), empleando una arquitectura basada en **microservicios**, bases de datos replicadas (**Master-Slave** con MariaDB) y comunicación a través de **REST APIs**.  
+Este sistema distribuido gestiona múltiples centros médicos (Quito, Guayaquil, Cuenca, Latacunga), empleando una arquitectura basada en **microservicios**, bases de datos replicadas (**Master-Slave** con MariaDB) y comunicación a través de **REST APIs**.  
 
 Todo está orquestado con **Docker Compose** y controlado con **Git + GitHub**.
 
