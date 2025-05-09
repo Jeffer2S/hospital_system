@@ -24,7 +24,7 @@ Docker & Docker Compose
 
 # DevOps: GitHub
 
-# Despliegue (sugerido): Vercel (Frontend), Azure App Service o Render (Backend)
+- Despliegue (sugerido): Vercel (Frontend), Azure App Service o Render (Backend)
 
 ## ✅ Requisitos
  - Git
