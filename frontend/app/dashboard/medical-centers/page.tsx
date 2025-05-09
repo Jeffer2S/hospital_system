@@ -196,6 +196,7 @@ function MedicalCentersContent() {
                     <SelectItem value={City.QUITO}>Quito</SelectItem>
                     <SelectItem value={City.GUAYAQUIL}>Guayaquil</SelectItem>
                     <SelectItem value={City.CUENCA}>Cuenca</SelectItem>
+                    <SelectItem value={City.CUENCA}>Latacunga</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -312,6 +313,7 @@ function MedicalCentersContent() {
                   <SelectItem value={City.QUITO}>Quito</SelectItem>
                   <SelectItem value={City.GUAYAQUIL}>Guayaquil</SelectItem>
                   <SelectItem value={City.CUENCA}>Cuenca</SelectItem>
+                  <SelectItem value={City.CUENCA}>Latacunga</SelectItem>
                 </SelectContent>
               </Select>
             </div>

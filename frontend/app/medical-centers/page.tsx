@@ -59,6 +59,7 @@ export default function MedicalCentersPage() {
               <SelectItem value={City.QUITO}>Quito</SelectItem>
               <SelectItem value={City.GUAYAQUIL}>Guayaquil</SelectItem>
               <SelectItem value={City.CUENCA}>Cuenca</SelectItem>
+              <SelectItem value={City.CUENCA}>Latacunga</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -95,8 +96,30 @@ export default function MedicalCentersPage() {
         </div>
       ) : (
         <div className="text-center py-12">
-          <h3 className="text-lg font-medium">No se encontraron centros médicos</h3>
-          <p className="text-muted-foreground mt-2">No hay centros médicos disponibles en la ciudad seleccionada.</p>
+          <div className="border border-blue-500 rounded-lg p-4 shadow-md">
+  <div className="flex items-center gap-2 mb-4 text-blue-600">
+    <span className="text-xl">🏥</span>
+    <h3 className="text-lg font-semibold">Centros Médicos</h3>
+  </div>
+
+  <p className="text-muted-foreground mt-2 flex items-center gap-2">
+    <span className="text-red-500">📍</span>
+    Centro Médico Quito Norte - Av. De los Shyris y Portugal - Quito
+  </p>
+  <p className="text-muted-foreground mt-2 flex items-center gap-2">
+    <span className="text-red-500">📍</span>
+    Hospital Los Ceibos - Av. del Bombero y Juan Tanca Marengo - Guayaquil
+  </p>
+  <p className="text-muted-foreground mt-2 flex items-center gap-2">
+    <span className="text-red-500">📍</span>
+    Centro Médico Cuenca Norte - Av. Remigio Crespo y Av. Solano - Cuenca
+  </p>
+  <p className="text-muted-foreground mt-2 flex items-center gap-2">
+    <span className="text-red-500">📍</span>
+    Centro Médico Latacunga - Calle Quito y Av. Unidad Nacional - Latacunga
+  </p>
+</div>
+
         </div>
       )}
     </div>

@@ -61,6 +61,7 @@ export default function AppointmentsPage() {
         if (hasRole([UserRole.PATIENT, UserRole.ADMIN])) {
           const doctorsData = await getAllDoctors()
           setDoctors(doctorsData)
+          console.log(doctors)
         }
       } catch (error) {
         console.error("Error al cargar datos:", error)
@@ -83,7 +84,7 @@ export default function AppointmentsPage() {
         appointment_time: newAppointment.appointment_time,
         status: "pending",
       }
-
+      
       const createdAppointment = await createAppointment(appointmentData)
       setAppointments([...appointments, createdAppointment])
       setIsDialogOpen(false)
