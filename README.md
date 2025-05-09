@@ -19,7 +19,7 @@ React + Vite
 # Base de Datos:
 MariaDB con replicación
 
-# Contenerización:
+# contenedores (Docker):
 Docker & Docker Compose
 
 # DevOps: GitHub
